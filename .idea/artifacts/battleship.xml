@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact type="javafx" name="battleship">
+    <output-path>$USER_HOME$/Desktop</output-path>
+    <root id="root">
+      <element id="archive" name="battleship.jar">
+        <element id="module-output" name="battleship" />
+        <element id="directory" name="META-INF">
+          <element id="file-copy" path="$PROJECT_DIR$/src/sample/META-INF/MANIFEST.MF" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>
