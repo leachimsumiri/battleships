@@ -1,9 +1,8 @@
 # Battleships Refactoring
 
-Note that Java FX was removed from the SDK with Java 11.
+For running locally: Note that Java FX was removed from the SDK with Java 11.
 
-## Angabe
-### Code Review und Refactoring
+## Angabe: Code Review und Refactoring
 * Welche „Bad Smells“ sind Ihnen aufgefallen und konnten Sie lösen?
 * Welche „Bad Smells“ sind Ihnen aufgefallen und konnten Sie (noch) nicht lösen?
 * Wie ist die Trennung zwischen GUI und Business Logik?
