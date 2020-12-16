@@ -80,22 +80,6 @@ public class ImageShip
         return imageView;
     }
 
-    public int getBeginX()
-    {
-        return beginX;
-    }
-
-    public int getBeginY()
-    {
-        return beginY;
-    }
-
-    public Image getImage()
-    {
-        return image;
-    }
-
-
     /*Konstruktor, mit dem wir die Schiffe in der Main (großer Block am Anfang) erstellen. Jedes Schiff hat die
     Eigenschaften und Funktionen, die hier drinnen stehen. z.B Es sind alle Schiffe automatisch nach rechts
     orientiert.*/

@@ -21,31 +21,8 @@ public class AIsave
         return direction;
     }
 
-    public boolean isWater()
-    {
-        return water;
-    }
-
     public void setDirection(Direction direction)
     {
-        this.direction = direction;
-    }
-
-    public void setWater(boolean water)
-    {
-        this.water = water;
-    }
-
-    public AIsave(int x, int y)
-    {
-        this.x = x;
-        this.y = y;
-    }
-
-    public AIsave(int x, int y, Direction direction)
-    {
-        this.x = x;
-        this.y = y;
         this.direction = direction;
     }
 

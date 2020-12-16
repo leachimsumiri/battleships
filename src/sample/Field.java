@@ -6,11 +6,6 @@ public class Field
 {
     private ArrayList<Ship> fleet = new ArrayList<>();
 
-    public ArrayList<Ship> getFleet()
-    {
-        return fleet;
-    }
-
     /*Überprüft für alle Schiffe und deren ShipParts(zweite For Schleife), ob sie auf den jeweils übergebenen x,y
     Koordinaten liegen.*/
     private boolean isFree(int x, int y)
