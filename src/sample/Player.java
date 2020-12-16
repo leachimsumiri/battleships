@@ -35,12 +35,4 @@ public class Player
     {
         this.attackpositions = new ArrayList<>();
     }
-
-    private boolean isHuman;
-
-    Player(boolean isHuman)
-    {
-        this.isHuman = isHuman;
-    }
-
 }

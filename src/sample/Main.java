@@ -19,23 +19,29 @@ import javafx.scene.media.MediaPlayer;
 
 import java.io.File;
 
+public class Main extends Application {
+    private static final String NEW_GAME_TEXT = "Neues Spiel";
+    private static final String END_GAME_TEXT = "Spiel beenden";
+    private static final String RESTART_GAME_TEXT = "Neustart";
+    private static final String SAVE_SHIPS_TEXT = "Schiffsplatzierungen speichern";
+    private static final String SHOW_OWN_SHIPS_TEXT = "Zeige meine Schiffe";
+    private static final String CONTINUE_TEXT = "Weiter";
 
-public class Main extends Application
-{
-    private Player player1 = new Player(true);
-    private Player player2 = new Player(true);
+    private Player player1 = new Player();
+    private Player player2 = new Player();
+
     private double pressedX, pressedY;
     private int gameround = 1;
-    private boolean shipscomplete = false; //zu testzwecken auf true später muss auf false gestellt werden
+    private boolean shipscomplete = false;
 
-    private Button buttonSaveShipsLeft = new Button("Schiffe speichern");
-    private Button buttonSaveShipsRight = new Button("Schiffe Speichern");
-    private Button newGame = new Button("Neues Spiel");
-    private Button exit = new Button("Ka Lust mehr! EXIT");
-    private Button reset = new Button("Neustart");
-    private Button seeShips1 = new Button("Zeige meine Schiffe");
-    private Button seeShips2 = new Button("Zeige meine Schiffe");
-    private Button cont = new Button("Hier gehts weiter");
+    private Button buttonSaveShipsLeft = new Button(SAVE_SHIPS_TEXT);
+    private Button buttonSaveShipsRight = new Button(SAVE_SHIPS_TEXT);
+    private Button newGame = new Button(NEW_GAME_TEXT);
+    private Button exit = new Button(END_GAME_TEXT);
+    private Button reset = new Button(RESTART_GAME_TEXT);
+    private Button seeShips1 = new Button(SHOW_OWN_SHIPS_TEXT);
+    private Button seeShips2 = new Button(SHOW_OWN_SHIPS_TEXT);
+    private Button cont = new Button(CONTINUE_TEXT);
 
     private ImageView startmenu = new ImageView("file:res/start.png");
     private ImageView wonleft = new ImageView("file:res/spieler1_gewonnen.png");
@@ -45,7 +51,6 @@ public class Main extends Application
 
     private Rectangle indicate1 = new Rectangle(439, 481, 442, 7);
     private Rectangle indicate2 = new Rectangle(919, 481, 442, 7);
-
 
     private Media bomb = new Media(new File("res/bomb.wav").toURI().toString());
     private MediaPlayer bombplay = new MediaPlayer(bomb);
@@ -114,7 +119,6 @@ public class Main extends Application
                 {
                     pressedX = event.getSceneX();
                     pressedY = event.getSceneY();
-                    //    System.out.println("x = " + pressedX + " y = " + pressedY);
                     attacks((int) Math.round(pressedX), (int) Math.round(pressedY));
                 }
             }
