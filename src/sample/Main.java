@@ -117,7 +117,6 @@ public class Main extends Application {
         buttonSaveShipsLeft.setLayoutX(1800 - 1520 - 3 * 40);
         buttonSaveShipsLeft.setLayoutY(500);
         buttonSaveShipsLeft.setPrefSize(120, 10);
-
         buttonSaveShipsLeft.setOnAction(event -> {
             saveShips(imageShip0, player1, 440 + 40, 40 + 440 + 40 + 40, 440 + 440, 40 + 920);
             allFleetsComplete();
@@ -273,15 +272,12 @@ public class Main extends Application {
 
 
     private void saveShips(ImageShip imageShip[], Player player, int p1x, int p1y, int p2x, int p2y) {
-        //System.out.println("Knopf gedrückt");
-
-        /*Geht alle Schiffe duch und schaut erstmal ob */
         for (ImageShip imageship : imageShip) {
             if (!imageship.isDisable()) {
                 int a[] = calculateXY(imageship.getX(), imageship.getY(), p1x, p1y, p2x, p2y);
 
                 if (a != null) {
-                    if (player.area.setShip(a[0], a[1], imageship.getLength(), imageship.getDirection(), imageship.getDiffvectorx(), imageship.getDiffvectory())) {
+                    if (player.area.addShipToFleet(a[0], a[1], imageship.getLength(), imageship.getDirection(), imageship.getDiffvectorx(), imageship.getDiffvectory())) {
                         // System.out.println("schiff angelegt");
                         imageship.lock();
 

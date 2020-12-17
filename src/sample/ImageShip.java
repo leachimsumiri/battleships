@@ -132,14 +132,6 @@ public class ImageShip {
                 }
 
                 if (event.getEventType() == MouseEvent.MOUSE_CLICKED && event.getButton().equals(MouseButton.SECONDARY)) {
-                    /*
-                    System.out.println("echt x= " + getX() + "y= " + getY());
-                    int a[] = calculateXY(getX(), getY(), 440 + 40, 40 + 440 + 40 + 40, 440 + 440, 40 + 920);
-                    if (a != null)
-                    {
-                        System.out.println("x= " + (a[0] + 1) + "y= " + (a[1] + 1));
-                    }
-                    */
                     rotate();
                 }
             }
