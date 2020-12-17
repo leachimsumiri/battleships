@@ -1,8 +1,12 @@
 package sample;
 
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Field {
+    private final static Logger LOGGER = Logger.getLogger(Field.class.getName());
+
     private static final int AMOUNT_OF_SMALL_SHIPS = 4;
     private static final int AMOUNT_OF_MEDIUM_SHIPS = 3;
     private static final int AMOUNT_OF_LARGE_SHIPS = 2;
@@ -10,12 +14,10 @@ public class Field {
 
     private ArrayList<Ship> fleet = new ArrayList<>();
 
-    /*Überprüft für alle Schiffe und deren ShipParts(zweite For Schleife), ob sie auf den jeweils übergebenen x,y
-    Koordinaten liegen.*/
-    private boolean isFree(int x, int y) {
-        for (Ship warship : this.fleet) {
-            for (ShipPart part : warship.getShipParts()) {
-                if (part.getX() == x && part.getY() == y) {
+    private boolean isFieldFree(int x, int y) {
+        for (Ship ship : this.fleet) {
+            for (ShipPart shipPart : ship.getShipParts()) {
+                if (shipPart.getX() == x && shipPart.getY() == y) {
                     return false;
                 }
             }
@@ -23,18 +25,15 @@ public class Field {
         return true;
     }
 
-    /*Überprüft, ob man setzen darf.*/
     private boolean isAreaFree(int x, int y, int length, Direction dir) {
         for (int i = 0; i < length; i++) {
-            /*Hier, nimmt es die Koordinaten und prüft ob es innerhalb vom Spielfeld liegt. Wenn nicht, returned er false und
-            isAreaFree liefert in der setShip Methode false zurück (was dann passiert, steht in der setShip Methode)*/
-            if (x < 0 || x > 9 || y < 0 || y > 9) {
-                //  System.out.println("anlegen x= "+x +" y= "+y);
+            if (pointIsValid(x, y)) {
+                LOGGER.log(Level.INFO, "Point invalid");
                 return false;
             }
 
-            /*Überprüft, ob möglich zu setzen mit der isFree Methode. Wenn nicht, ebenfalls false.*/
-            if (!this.isFree(x, y)) {
+            if (!this.isFieldFree(x, y)) {
+                LOGGER.log(Level.INFO, "Field not free");
                 return false;
             }
 
@@ -58,6 +57,14 @@ public class Field {
             }
         }
         return true;
+    }
+
+    private boolean coordinateIsValid(int coordinate){
+        return coordinate >= 0 && coordinate <= 9;
+    }
+
+    private boolean pointIsValid(int x, int y){
+        return coordinateIsValid(x) && coordinateIsValid(y);
     }
 
     private int shipCount(int length) {

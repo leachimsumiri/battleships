@@ -120,7 +120,7 @@ public class Main extends Application {
 
         buttonSaveShipsLeft.setOnAction(event -> {
             saveShips(imageShip0, player1, 440 + 40, 40 + 440 + 40 + 40, 440 + 440, 40 + 920);
-            shipsComplete();
+            allFleetsComplete();
         });
 
 
@@ -129,7 +129,7 @@ public class Main extends Application {
         buttonSaveShipsRight.setPrefSize(120, 10);
         buttonSaveShipsRight.setOnAction(event -> {
             saveShips(imageShip1, player2, 2 * 440 + 40 + 40, 40 + 440 + 40 + 40, 440 + 440 + 40 + 440, 920 + 40);
-            shipsComplete();
+            allFleetsComplete();
         });
 
 
@@ -487,7 +487,7 @@ public class Main extends Application {
         }
     }
 
-    private void shipsComplete() {
+    private void allFleetsComplete() {
         if (player1.area.isFleetComplete() && player2.area.isFleetComplete()) {
             this.shipscomplete = true;
         }
