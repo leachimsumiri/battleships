@@ -20,7 +20,7 @@ public class Main extends Application {
     private static final String NEW_GAME_TEXT = "Neues Spiel";
     private static final String END_GAME_TEXT = "Spiel beenden";
     private static final String RESTART_GAME_TEXT = "Neustart";
-    private static final String SAVE_SHIPS_TEXT = "Schiffsplatzierungen speichern";
+    private static final String SAVE_SHIPS_TEXT = "Schiffe speichern";
     private static final String SHOW_OWN_SHIPS_TEXT = "Zeige meine Schiffe";
     private static final String CONTINUE_TEXT = "Weiter";
 
