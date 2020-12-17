@@ -33,7 +33,7 @@ public class Field {
     private boolean isAreaFree(int x, int y, int length, Direction direction) {
         for (int i = 0; i < length; i++) {
             if (pointIsValid(x, y)) {
-                LOGGER.log(Level.INFO, "Point invalid");
+                LOGGER.log(Level.INFO, "Field invalid");
                 return false;
             }
 
@@ -111,7 +111,7 @@ public class Field {
             this.fleet.add(new Ship(x, y, length, dire, diffvectorx, diffvectory));
             return true;
         } else {
-            LOGGER.log(Level.INFO, "Ship couldn't be added because Area was not free");
+            LOGGER.log(Level.INFO, "Ship couldn't be added because Area was not free or Field was invalid");
             return false;
         }
     }
