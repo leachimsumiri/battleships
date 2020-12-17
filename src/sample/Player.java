@@ -1,9 +1,7 @@
 package sample;
 
 import java.util.ArrayList;
-import java.util.Random;
 
-//In der Klasse sind alle Eigenschaften, die ein Player hat
 public class Player {
     Field area = new Field();
 

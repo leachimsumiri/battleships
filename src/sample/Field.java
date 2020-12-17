@@ -3,6 +3,11 @@ package sample;
 import java.util.ArrayList;
 
 public class Field {
+    private static final int AMOUNT_OF_SMALL_SHIPS = 4;
+    private static final int AMOUNT_OF_MEDIUM_SHIPS = 3;
+    private static final int AMOUNT_OF_LARGE_SHIPS = 2;
+    private static final int AMOUNT_OF_XLARGE_SHIPS = 1;
+
     private ArrayList<Ship> fleet = new ArrayList<>();
 
     /*Überprüft für alle Schiffe und deren ShipParts(zweite For Schleife), ob sie auf den jeweils übergebenen x,y
@@ -41,15 +46,12 @@ public class Field {
                 case UP:
                     y--;
                     break;
-
                 case RIGHT:
                     x++;
                     break;
-
                 case LEFT:
                     x--;
                     break;
-
                 case DOWN:
                     y++;
                     break;
@@ -58,9 +60,6 @@ public class Field {
         return true;
     }
 
-    /*Es zählt wie viele Schiffe es in der Länge schon gibt, in der wir gerade anlegen wollen. Nimmt hier aber noch
-    keine Rücksicht darauf, ob es schon 4 in der Länge 2 z.B schon gibt. Das passiert erst in der setShip Methode bzw
-    . isFleetComplete. */
     private int shipCount(int length) {
         int count = 0;
         for (Ship warship : this.fleet) {
@@ -71,10 +70,28 @@ public class Field {
         return count;
     }
 
-    /*Liefert true zurück, wenn die folgenden Bedienungen in der Klammer, nach dem return, erfüllt sind. Sprich, wenn
-     shipCount für alle(!!) Schiffslängen die richtige Anzahl gezählt hat (z.B für length 2 ==4(Schiff)), dann true.*/
     public boolean isFleetComplete() {
-        return ((this.shipCount(2) == 4 && this.shipCount(3) == 3 && this.shipCount(4) == 2 && this.shipCount(5) == 1));//es gibt 4 2er ,3 3er  ,2 4er und 1 5er
+        return allShipsPlaced();
+    }
+
+    private boolean allSmallShipsPlaced(){
+        return this.shipCount(2) == AMOUNT_OF_SMALL_SHIPS;
+    }
+
+    private boolean allMediumShipsPlaced(){
+        return this.shipCount(3) == AMOUNT_OF_MEDIUM_SHIPS;
+    }
+
+    private boolean allLargeShipsPlaced(){
+        return this.shipCount(4) == AMOUNT_OF_LARGE_SHIPS;
+    }
+
+    private boolean allXLargeShipsPlaced(){
+        return this.shipCount(5) == AMOUNT_OF_XLARGE_SHIPS;
+    }
+
+    private boolean allShipsPlaced(){
+        return allSmallShipsPlaced() && allMediumShipsPlaced() && allLargeShipsPlaced() && allXLargeShipsPlaced();
     }
 
     public boolean setShip(int x, int y, int length, Direction dire, int diffvectorx, int diffvectory) {

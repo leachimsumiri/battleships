@@ -23,17 +23,14 @@ public class ShipPart {
         this.y = y;
         this.damage = false;
 
-        /*Dient der Ausgabe für uns, zum testen*/
         System.out.println(" schiffteil an X= " + this.x + " Y =" + this.y + " schaden= " + this.damage);
     }
 
-    /*ist dieser Teil vom Schiff zerstört?*/
     public boolean isDamaged()
     {
         return damage;
     }
 
-    /*Wird in der Ship klasse, in der attack Methode aufgerufen!*/
     public void destroy()
     {
         this.damage = true;

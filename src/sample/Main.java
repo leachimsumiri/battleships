@@ -307,20 +307,16 @@ public class Main extends Application {
                 changeMask();
                 buttonSaveShipsLeft.setVisible(false);
 
-
             } else {
                 buttonSaveShipsRight.setVisible(false);
                 changeMask();
                 seeShips1.setVisible(true);
                 seeShips2.setVisible(true);
                 indicate1.setVisible(true);
-
-
             }
             if (player1.area.isFleetComplete() && player2.area.isFleetComplete()) {
                 activateMask();
             }
-
         }
     }
 
@@ -491,12 +487,10 @@ public class Main extends Application {
         }
     }
 
-    //Alle Schiffe beider Spieler sind gesetzt, dann true
     private void shipsComplete() {
         if (player1.area.isFleetComplete() && player2.area.isFleetComplete()) {
             this.shipscomplete = true;
         }
-
     }
 
     //Für einzelne Methoden, siehe entsprechende Klassen. Canvas wird zurückgesetzt
