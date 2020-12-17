@@ -32,7 +32,7 @@ public class Field {
 
     private boolean isAreaFree(int x, int y, int length, Direction direction) {
         for (int i = 0; i < length; i++) {
-            if (pointIsValid(x, y)) {
+            if (!pointIsValid(x, y)) {
                 LOGGER.log(Level.INFO, "Field invalid");
                 return false;
             }
