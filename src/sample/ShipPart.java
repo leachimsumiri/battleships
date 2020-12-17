@@ -1,7 +1,6 @@
 package sample;
 
-public class ShipPart
-{
+public class ShipPart {
     /*Jeder Teil vom Schiff (in unserem Fall ist jeder Teil genau 40pixel lang) hat die Eigenschaften von der Klasse
     ShipPart*/
 
@@ -19,8 +18,7 @@ public class ShipPart
         return y;
     }
 
-    public ShipPart(int x, int y)
-    {
+    public ShipPart(int x, int y) {
         this.x = x;
         this.y = y;
         this.damage = false;
@@ -40,5 +38,4 @@ public class ShipPart
     {
         this.damage = true;
     }
-
 }

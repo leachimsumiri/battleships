@@ -4,8 +4,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 //In der Klasse sind alle Eigenschaften, die ein Player hat
-public class Player
-{
+public class Player {
     Field area = new Field();
 
     private ArrayList<AttackPositions> attackpositions = new ArrayList<>();
@@ -18,12 +17,9 @@ public class Player
 
     /*Wir verhindern doppelten Angriff. Wir schauen, mit der foreach Schleife, ob die Übergebenen x,y von attackPossible
     schon in einer der gespeicherten Stellen in unserer ArrayList attackpositions enthalten ist.*/
-    boolean attackPossible(int x, int y)
-    {
-        for (AttackPositions a : this.attackpositions)
-        {
-            if ((a.getX() == x) && (a.getY() == y))
-            {
+    boolean attackPossible(int x, int y) {
+        for (AttackPositions a : this.attackpositions) {
+            if ((a.getX() == x) && (a.getY() == y)) {
                 return false;
             }
         }
