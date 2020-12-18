@@ -34,6 +34,8 @@ public class GameGUI {
     public static final Rectangle INDICATE_1 = new Rectangle(439, 481, 442, 7);
     public static final Rectangle INDICATE_2 = new Rectangle(919, 481, 442, 7);
 
+    public static Font font = new Font(30);
+
     public static void setIslandImageViewProperties(){
         LEFT_ISLAND_IMAGE_VIEW.setX(439);
         LEFT_ISLAND_IMAGE_VIEW.setY(39 + 440 + 40);
@@ -41,7 +43,18 @@ public class GameGUI {
         RIGHT_ISLAND_IMAGE_VIEW.setY(39 + 440 + 40);
     }
 
-    public static void initResetButton(Pane battleshipContainer, Stage stage){
+    public static Scene createNewScene(Pane battleshipContainer){
+        return new Scene(battleshipContainer, Constants.FIXED_GAMEWINDOW_WIDTH, Constants.FIXED_GAMEWINDOW_HEIGHT);
+    }
+
+    public static void updateStage(Pane battleshipContainer, Stage stage){
+        Scene scene = GameGUI.createNewScene(battleshipContainer);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    //TODO evtl. generische inits etc.
+    public static void initResetButton(Pane battleshipContainer, Stage stage) {
         setResetButtonProperties();
         addResetButtonEventListener(battleshipContainer, stage);
     }
@@ -62,11 +75,15 @@ public class GameGUI {
         });
     }
 
+    public static void initNewGameButton(Pane battleshipContainer, Stage stage){
+        setNewGameButtonProperties();
+        addNewGameButtonEventListener(battleshipContainer, stage);
+    }
+
     private static void setNewGameButtonProperties(){
         GameGUI.NEW_GAME_BUTTON.setLayoutX(700);
         GameGUI.NEW_GAME_BUTTON.setLayoutY(300);
         GameGUI.NEW_GAME_BUTTON.setMinSize(400, 150);
-        Font font = new Font(30);
         GameGUI.NEW_GAME_BUTTON.setFont(font);
     }
 
@@ -79,13 +96,36 @@ public class GameGUI {
         });
     }
 
-    public static Scene createNewScene(Pane battleshipContainer){
-        return new Scene(battleshipContainer, Constants.FIXED_GAMEWINDOW_WIDTH, Constants.FIXED_GAMEWINDOW_HEIGHT);
+    public static void initExitButton(){
+        setExitButtonProperties();
+        addExitButtonEventListener();
     }
 
-    public static void updateStage(Pane battleshipContainer, Stage stage){
-        Scene scene = GameGUI.createNewScene(battleshipContainer);
-        stage.setScene(scene);
-        stage.show();
+    private static void setExitButtonProperties(){
+        GameGUI.EXIT_BUTTON.setLayoutX(700);
+        GameGUI.EXIT_BUTTON.setLayoutY(500);
+        GameGUI.EXIT_BUTTON.setMinSize(400, 150);
+        GameGUI.EXIT_BUTTON.setFont(font);
+        GameGUI.EXIT_BUTTON.setOnAction(event -> System.exit(0));
+    }
+
+    private static void addExitButtonEventListener(){
+        GameGUI.EXIT_BUTTON.setOnAction(event -> System.exit(0));
+    }
+
+    public static void addContinueButtonEventListener(Pane battleshipContainer, Stage stage){
+        GameGUI.CONTINUE_BUTTON.setOnAction(event -> {
+            Main main = new Main();
+            main.resetGame();
+
+            GameGUI.RESET_BUTTON.setVisible(false);
+            battleshipContainer.getChildren().add(GameGUI.NEW_GAME_BUTTON);
+            battleshipContainer.getChildren().add(GameGUI.EXIT_BUTTON);
+            GameGUI.START_MENU_IMAGE_VIEW.setVisible(true);
+            GameGUI.NEW_GAME_BUTTON.setVisible(true);
+            GameGUI.EXIT_BUTTON.setVisible(true);
+
+            GameGUI.updateStage(battleshipContainer, stage);
+        });
     }
 }

@@ -36,35 +36,20 @@ public class Main extends Application {
 
         drawGUI();
 
+        //TODO evtl. iwie zamfassen
+        //+ battelshipcontainer und stage müssen zu oft zur GameGUI, was dazu überlegen
         GameGUI.initResetButton(battleshipContainer, primaryStage);
         battleshipContainer.getChildren().add(GameGUI.RESET_BUTTON);
 
-
+        GameGUI.initNewGameButton(battleshipContainer, primaryStage);
         battleshipContainer.getChildren().add(GameGUI.NEW_GAME_BUTTON);
 
-        GameGUI.EXIT_BUTTON.setLayoutX(700);
-        GameGUI.EXIT_BUTTON.setLayoutY(500);
-        GameGUI.EXIT_BUTTON.setMinSize(400, 150);
-        //GameGUI.EXIT_BUTTON.setFont(font);
-        GameGUI.EXIT_BUTTON.setOnAction(event -> System.exit(0));
-
+        GameGUI.initExitButton();
         battleshipContainer.getChildren().add(GameGUI.EXIT_BUTTON);
-        GameGUI.CONTINUE_BUTTON.setOnAction(event -> {
-            resetGame();
-            GameGUI.RESET_BUTTON.setVisible(false);
-            battleshipContainer.getChildren().add(GameGUI.NEW_GAME_BUTTON);
-            battleshipContainer.getChildren().add(GameGUI.EXIT_BUTTON);
-            GameGUI.START_MENU_IMAGE_VIEW.setVisible(true);
-            GameGUI.NEW_GAME_BUTTON.setVisible(true);
-            GameGUI.EXIT_BUTTON.setVisible(true);
-            Scene scene = new Scene(battleshipContainer, 1800, 1000);
-            primaryStage.setScene(scene);
-            primaryStage.show();
-        });
 
-        Scene scene = new Scene(battleshipContainer, 1800, 1000);
-        primaryStage.setScene(scene);
-        primaryStage.show();
+        GameGUI.addContinueButtonEventListener(battleshipContainer, primaryStage);
+
+        GameGUI.updateStage(battleshipContainer, primaryStage);
     }
 
     private void drawGUI() {
