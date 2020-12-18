@@ -261,4 +261,19 @@ public class ShipImage {
             this.rotate();
         }
     }
+
+    public static ShipImage[] createInitialShipImages(InitialFields initialFields){
+        return new ShipImage[]{
+                new ShipImage(initialFields.getSmallShipField(), Constants.FIELDLENGTH_OF_SMALL_SHIPS, Constants.battleshipImages[0]),
+                new ShipImage(initialFields.getSmallShipField(), Constants.FIELDLENGTH_OF_SMALL_SHIPS, Constants.battleshipImages[0]),
+                new ShipImage(initialFields.getSmallShipField(), Constants.FIELDLENGTH_OF_SMALL_SHIPS, Constants.battleshipImages[0]),
+                new ShipImage(initialFields.getSmallShipField(), Constants.FIELDLENGTH_OF_SMALL_SHIPS, Constants.battleshipImages[0]),
+                new ShipImage(initialFields.getMediumShipField(), Constants.FIELDLENGTH_OF_MEDIUM_SHIPS, Constants.battleshipImages[1]),
+                new ShipImage(initialFields.getMediumShipField(), Constants.FIELDLENGTH_OF_MEDIUM_SHIPS, Constants.battleshipImages[1]),
+                new ShipImage(initialFields.getMediumShipField(), Constants.FIELDLENGTH_OF_MEDIUM_SHIPS, Constants.battleshipImages[1]),
+                new ShipImage(initialFields.getLargeShipField(), Constants.FIELDLENGTH_OF_LARGE_SHIPS, Constants.battleshipImages[2]),
+                new ShipImage(initialFields.getLargeShipField(), Constants.FIELDLENGTH_OF_LARGE_SHIPS, Constants.battleshipImages[2]),
+                new ShipImage(initialFields.getXlargeShipField(), Constants.FIELDLENGTH_OF_XLARGE_SHIPS, Constants.battleshipImages[3])
+        };
+    }
 }

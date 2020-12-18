@@ -7,19 +7,6 @@ import java.util.logging.Logger;
 public class PlayerGameField {
     private final static Logger LOGGER = Logger.getLogger(PlayerGameField.class.getName());
 
-    private static final int AMOUNT_OF_SMALL_SHIPS = 4;
-    private static final int AMOUNT_OF_MEDIUM_SHIPS = 3;
-    private static final int AMOUNT_OF_LARGE_SHIPS = 2;
-    private static final int AMOUNT_OF_XLARGE_SHIPS = 1;
-
-    private static final int FIELDLENGTH_OF_SMALL_SHIPS = 2;
-    private static final int FIELDLENGTH_OF_MEDIUM_SHIPS = 3;
-    private static final int FIELDLENGTH_OF_LARGE_SHIPS = 4;
-    private static final int FIELDLENGTH_OF_XLARGE_SHIPS = 5;
-
-    private static final int FIELD_MIN_VALUE = 1;
-    private static final int FIELD_MAX_VALUE = 9;
-
     private ArrayList<Ship> fleet = new ArrayList<>();
 
     private boolean isFieldFree(Field field) {
@@ -68,7 +55,7 @@ public class PlayerGameField {
     }
 
     private boolean coordinateIsValid(int coordinate){
-        return coordinate >= FIELD_MIN_VALUE && coordinate <= FIELD_MAX_VALUE;
+        return coordinate >= Constants.FIELD_MIN_VALUE && coordinate <= Constants.FIELD_MAX_VALUE;
     }
 
     private boolean isFieldValid(Field field){
@@ -90,19 +77,19 @@ public class PlayerGameField {
     }
 
     private boolean allSmallShipsPlaced(){
-        return this.currentShipsWithLength(FIELDLENGTH_OF_SMALL_SHIPS) == AMOUNT_OF_SMALL_SHIPS;
+        return this.currentShipsWithLength(Constants.FIELDLENGTH_OF_SMALL_SHIPS) == Constants.AMOUNT_OF_SMALL_SHIPS;
     }
 
     private boolean allMediumShipsPlaced(){
-        return this.currentShipsWithLength(FIELDLENGTH_OF_MEDIUM_SHIPS) == AMOUNT_OF_MEDIUM_SHIPS;
+        return this.currentShipsWithLength(Constants.FIELDLENGTH_OF_MEDIUM_SHIPS) == Constants.AMOUNT_OF_MEDIUM_SHIPS;
     }
 
     private boolean allLargeShipsPlaced(){
-        return this.currentShipsWithLength(FIELDLENGTH_OF_LARGE_SHIPS) == AMOUNT_OF_LARGE_SHIPS;
+        return this.currentShipsWithLength(Constants.FIELDLENGTH_OF_LARGE_SHIPS) == Constants.AMOUNT_OF_LARGE_SHIPS;
     }
 
     private boolean allXLargeShipsPlaced(){
-        return this.currentShipsWithLength(FIELDLENGTH_OF_XLARGE_SHIPS) == AMOUNT_OF_XLARGE_SHIPS;
+        return this.currentShipsWithLength(Constants.FIELDLENGTH_OF_XLARGE_SHIPS) == Constants.AMOUNT_OF_XLARGE_SHIPS;
     }
 
     private boolean allShipsPlaced(){

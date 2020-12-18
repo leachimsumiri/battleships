@@ -18,41 +18,77 @@ public class Main extends Application {
     private int gameRound = 1;
     private boolean shipsComplete = false;
 
-    private Image bships[] = {
-            new Image("file:res/1x2_Schiff_Horizontal_1_Fertig.png"),
-            new Image("file:res/1x3_Schiff_Horizontal_1_Fertig.png"),
-            new Image("file:res/1x4_Schiff_Horizontal_1_Fertig.png"),
-            new Image("file:res/1x5_Schiff_Horizontal_1_Fertig.png")
-    };
-
-    ShipImage player1ShipImages[] = {
-            new ShipImage(Constants.PLAYER_1_SMALL_SHIP_IMAGE_INITIAL_FIELD, 2, bships[0]),
-            new ShipImage(Constants.PLAYER_1_SMALL_SHIP_IMAGE_INITIAL_FIELD, 2, bships[0]),
-            new ShipImage(Constants.PLAYER_1_SMALL_SHIP_IMAGE_INITIAL_FIELD, 2, bships[0]),
-            new ShipImage(Constants.PLAYER_1_SMALL_SHIP_IMAGE_INITIAL_FIELD, 2, bships[0]),
-            new ShipImage(Constants.PLAYER_1_MEDIUM_SHIP_IMAGE_INITIAL_FIELD, 3, bships[1]),
-            new ShipImage(Constants.PLAYER_1_MEDIUM_SHIP_IMAGE_INITIAL_FIELD, 3, bships[1]),
-            new ShipImage(Constants.PLAYER_1_MEDIUM_SHIP_IMAGE_INITIAL_FIELD, 3, bships[1]),
-            new ShipImage(Constants.PLAYER_1_LARGE_SHIP_IMAGE_INITIAL_FIELD, 4, bships[2]),
-            new ShipImage(Constants.PLAYER_1_LARGE_SHIP_IMAGE_INITIAL_FIELD, 4, bships[2]),
-            new ShipImage(Constants.PLAYER_1_X_LARGE_SHIP_IMAGE_INITIAL_FIELD, 5, bships[3])
-    };
-
-    ShipImage player2ShipImages[] = {
-            new ShipImage(Constants.PLAYER_2_SMALL_SHIP_IMAGE_INITIAL_FIELD, 2, bships[0]),
-            new ShipImage(Constants.PLAYER_2_SMALL_SHIP_IMAGE_INITIAL_FIELD, 2, bships[0]),
-            new ShipImage(Constants.PLAYER_2_SMALL_SHIP_IMAGE_INITIAL_FIELD, 2, bships[0]),
-            new ShipImage(Constants.PLAYER_2_SMALL_SHIP_IMAGE_INITIAL_FIELD, 2, bships[0]),
-            new ShipImage(Constants.PLAYER_2_MEDIUM_SHIP_IMAGE_INITIAL_FIELD, 3, bships[1]),
-            new ShipImage(Constants.PLAYER_2_MEDIUM_SHIP_IMAGE_INITIAL_FIELD, 3, bships[1]),
-            new ShipImage(Constants.PLAYER_2_MEDIUM_SHIP_IMAGE_INITIAL_FIELD, 3, bships[1]),
-            new ShipImage(Constants.PLAYER_2_LARGE_SHIP_IMAGE_INITIAL_FIELD, 4, bships[2]),
-            new ShipImage(Constants.PLAYER_2_LARGE_SHIP_IMAGE_INITIAL_FIELD, 4, bships[2]),
-            new ShipImage(Constants.PLAYER_2_X_LARGE_SHIP_IMAGE_INITIAL_FIELD, 5, bships[3])
-    };
-
+    ShipImage[] player1ShipImages = ShipImage.createInitialShipImages(Constants.PLAYER_1_INITIAL_FIELDS);
+    ShipImage[] player2ShipImages = ShipImage.createInitialShipImages(Constants.PLAYER_2_INITIAL_FIELDS);
 
     private Pane battleShipContainer = new Pane();
+
+    @Override
+    public void start(Stage primaryStage) {
+        BackgroundImage background = new BackgroundImage(new Image("file:res/BattleshipsBackground.png", 1800, 1000,
+                true, true), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+                BackgroundSize.DEFAULT);
+
+        //  ImageView Verdeckung = new ImageView("file:res/Spielfeldverdeckung.png");
+        GameGUI.LEFT_ISLAND_IMAGE_VIEW.setX(439);
+        GameGUI.LEFT_ISLAND_IMAGE_VIEW.setY(39 + 440 + 40);
+        GameGUI.RIGHT_ISLAND_IMAGE_VIEW.setX(439 + 440 + 40);
+        GameGUI.RIGHT_ISLAND_IMAGE_VIEW.setY(39 + 440 + 40);
+
+
+        battleShipContainer.setBackground(new Background(background));
+        drawGUI();
+
+        GameGUI.RESET_BUTTON.setLayoutX(440);
+        GameGUI.RESET_BUTTON.setLayoutY(10);
+        GameGUI.RESET_BUTTON.setPrefHeight(10);
+
+        GameGUI.RESET_BUTTON.setOnAction(event -> {
+            reset();
+            Scene scenel = new Scene(battleShipContainer, 1800, 1000);
+            primaryStage.setScene(scenel);
+            primaryStage.show();
+        });
+
+        battleShipContainer.getChildren().add(GameGUI.RESET_BUTTON);
+        GameGUI.NEW_GAME_BUTTON.setLayoutX(700);
+        GameGUI.NEW_GAME_BUTTON.setLayoutY(300);
+        GameGUI.NEW_GAME_BUTTON.setMinSize(400, 150);
+        Font font = new Font(30);
+        GameGUI.NEW_GAME_BUTTON.setFont(font);
+        GameGUI.NEW_GAME_BUTTON.setOnAction(event -> {
+            reset();
+            Scene scene = new Scene(battleShipContainer, 1800, 1000);
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        });
+
+        battleShipContainer.getChildren().add(GameGUI.NEW_GAME_BUTTON);
+
+        GameGUI.EXIT_BUTTON.setLayoutX(700);
+        GameGUI.EXIT_BUTTON.setLayoutY(500);
+        GameGUI.EXIT_BUTTON.setMinSize(400, 150);
+        GameGUI.EXIT_BUTTON.setFont(font);
+        GameGUI.EXIT_BUTTON.setOnAction(event -> System.exit(0));
+
+        battleShipContainer.getChildren().add(GameGUI.EXIT_BUTTON);
+        GameGUI.CONTINUE_BUTTON.setOnAction(event -> {
+            reset();
+            GameGUI.RESET_BUTTON.setVisible(false);
+            battleShipContainer.getChildren().add(GameGUI.NEW_GAME_BUTTON);
+            battleShipContainer.getChildren().add(GameGUI.EXIT_BUTTON);
+            GameGUI.START_MENU_IMAGE_VIEW.setVisible(true);
+            GameGUI.NEW_GAME_BUTTON.setVisible(true);
+            GameGUI.EXIT_BUTTON.setVisible(true);
+            Scene scene = new Scene(battleShipContainer, 1800, 1000);
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        });
+
+        Scene scene = new Scene(battleShipContainer, 1800, 1000);
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
 
     private void drawGUI() {
         AudioData.musicPlayer.setCycleCount(500);
@@ -137,73 +173,6 @@ public class Main extends Application {
             GameGUI.LEFT_ISLAND_IMAGE_VIEW.setVisible(true);
             GameGUI.RIGHT_ISLAND_IMAGE_VIEW.setVisible(false);
         }
-    }
-
-    @Override
-    public void start(Stage primaryStage) {
-        BackgroundImage background = new BackgroundImage(new Image("file:res/BattleshipsBackground.png", 1800, 1000,
-                true, true), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
-                BackgroundSize.DEFAULT);
-
-        //  ImageView Verdeckung = new ImageView("file:res/Spielfeldverdeckung.png");
-        GameGUI.LEFT_ISLAND_IMAGE_VIEW.setX(439);
-        GameGUI.LEFT_ISLAND_IMAGE_VIEW.setY(39 + 440 + 40);
-        GameGUI.RIGHT_ISLAND_IMAGE_VIEW.setX(439 + 440 + 40);
-        GameGUI.RIGHT_ISLAND_IMAGE_VIEW.setY(39 + 440 + 40);
-
-
-        battleShipContainer.setBackground(new Background(background));
-        drawGUI();
-
-        GameGUI.RESET_BUTTON.setLayoutX(440);
-        GameGUI.RESET_BUTTON.setLayoutY(10);
-        GameGUI.RESET_BUTTON.setPrefHeight(10);
-
-        GameGUI.RESET_BUTTON.setOnAction(event -> {
-            reset();
-            Scene scenel = new Scene(battleShipContainer, 1800, 1000);
-            primaryStage.setScene(scenel);
-            primaryStage.show();
-        });
-
-        battleShipContainer.getChildren().add(GameGUI.RESET_BUTTON);
-        GameGUI.NEW_GAME_BUTTON.setLayoutX(700);
-        GameGUI.NEW_GAME_BUTTON.setLayoutY(300);
-        GameGUI.NEW_GAME_BUTTON.setMinSize(400, 150);
-        Font font = new Font(30);
-        GameGUI.NEW_GAME_BUTTON.setFont(font);
-        GameGUI.NEW_GAME_BUTTON.setOnAction(event -> {
-            reset();
-            Scene scene = new Scene(battleShipContainer, 1800, 1000);
-            primaryStage.setScene(scene);
-            primaryStage.show();
-        });
-
-        battleShipContainer.getChildren().add(GameGUI.NEW_GAME_BUTTON);
-
-        GameGUI.EXIT_BUTTON.setLayoutX(700);
-        GameGUI.EXIT_BUTTON.setLayoutY(500);
-        GameGUI.EXIT_BUTTON.setMinSize(400, 150);
-        GameGUI.EXIT_BUTTON.setFont(font);
-        GameGUI.EXIT_BUTTON.setOnAction(event -> System.exit(0));
-
-        battleShipContainer.getChildren().add(GameGUI.EXIT_BUTTON);
-        GameGUI.CONTINUE_BUTTON.setOnAction(event -> {
-            reset();
-            GameGUI.RESET_BUTTON.setVisible(false);
-            battleShipContainer.getChildren().add(GameGUI.NEW_GAME_BUTTON);
-            battleShipContainer.getChildren().add(GameGUI.EXIT_BUTTON);
-            GameGUI.START_MENU_IMAGE_VIEW.setVisible(true);
-            GameGUI.NEW_GAME_BUTTON.setVisible(true);
-            GameGUI.EXIT_BUTTON.setVisible(true);
-            Scene scene = new Scene(battleShipContainer, 1800, 1000);
-            primaryStage.setScene(scene);
-            primaryStage.show();
-        });
-
-        Scene scene = new Scene(battleShipContainer, 1800, 1000);
-        primaryStage.setScene(scene);
-        primaryStage.show();
     }
 
     //berechnet spielfeld Koordination anhand von imageship größen (40px pro feld) <- unbedingt ändern..

@@ -1,5 +1,7 @@
 package main;
 
+import javafx.scene.image.Image;
+
 public class Constants {
     public static final String NEW_GAME_TEXT = "Neues Spiel";
     public static final String END_GAME_TEXT = "Spiel beenden";
@@ -21,13 +23,44 @@ public class Constants {
     public static final String WAV_MUSIC = "res/music.wav";
     public static final String WAV_WINNER = "res/winner.wav";
 
-    public static final Field PLAYER_1_SMALL_SHIP_IMAGE_INITIAL_FIELD = new Field(1520,640);
-    public static final Field PLAYER_1_MEDIUM_SHIP_IMAGE_INITIAL_FIELD = new Field(1520,720);
-    public static final Field PLAYER_1_LARGE_SHIP_IMAGE_INITIAL_FIELD = new Field(1520,800);
-    public static final Field PLAYER_1_X_LARGE_SHIP_IMAGE_INITIAL_FIELD = new Field(1520,880);
+    private static final Field PLAYER_1_SMALL_SHIP_IMAGE_INITIAL_FIELD  = new Field(1520,640);
+    private static final Field PLAYER_1_MEDIUM_SHIP_IMAGE_INITIAL_FIELD = new Field(1520,720);
+    private static final Field PLAYER_1_LARGE_SHIP_IMAGE_INITIAL_FIELD = new Field(1520,800);
+    private static final Field PLAYER_1_X_LARGE_SHIP_IMAGE_INITIAL_FIELD = new Field(1520,880);
 
-    public static final Field PLAYER_2_SMALL_SHIP_IMAGE_INITIAL_FIELD = new Field(1800 - 1520 - 3 * 40,640);
-    public static final Field PLAYER_2_MEDIUM_SHIP_IMAGE_INITIAL_FIELD = new Field(1800 - 1520 - 3 * 40,720);
-    public static final Field PLAYER_2_LARGE_SHIP_IMAGE_INITIAL_FIELD = new Field(1800 - 1520 - 3 * 40,800);
-    public static final Field PLAYER_2_X_LARGE_SHIP_IMAGE_INITIAL_FIELD = new Field(1800 - 1520 - 3 * 40,880);
+    public static final InitialFields PLAYER_1_INITIAL_FIELDS = new InitialFields(PLAYER_1_SMALL_SHIP_IMAGE_INITIAL_FIELD,
+            PLAYER_1_MEDIUM_SHIP_IMAGE_INITIAL_FIELD, PLAYER_1_LARGE_SHIP_IMAGE_INITIAL_FIELD, PLAYER_1_X_LARGE_SHIP_IMAGE_INITIAL_FIELD);
+
+    private static final Field PLAYER_2_SMALL_SHIP_IMAGE_INITIAL_FIELD = new Field(1800 - 1520 - 3 * 40,640);
+    private static final Field PLAYER_2_MEDIUM_SHIP_IMAGE_INITIAL_FIELD = new Field(1800 - 1520 - 3 * 40,720);
+    private static final Field PLAYER_2_LARGE_SHIP_IMAGE_INITIAL_FIELD = new Field(1800 - 1520 - 3 * 40,800);
+    private static final Field PLAYER_2_X_LARGE_SHIP_IMAGE_INITIAL_FIELD = new Field(1800 - 1520 - 3 * 40,880);
+
+    public static final InitialFields PLAYER_2_INITIAL_FIELDS = new InitialFields(PLAYER_2_SMALL_SHIP_IMAGE_INITIAL_FIELD,
+            PLAYER_2_MEDIUM_SHIP_IMAGE_INITIAL_FIELD, PLAYER_2_LARGE_SHIP_IMAGE_INITIAL_FIELD, PLAYER_2_X_LARGE_SHIP_IMAGE_INITIAL_FIELD);
+
+    private static String smallBattleshipImagePath = "file:res/1x2_Schiff_Horizontal_1_Fertig.png";
+    private static String mediumBattleshipImagePath = "file:res/1x3_Schiff_Horizontal_1_Fertig.png";
+    private static String largeBattleshipImagePath = "file:res/1x4_Schiff_Horizontal_1_Fertig.png";
+    private static String xlargeBattleshipImagePath = "file:res/1x5_Schiff_Horizontal_1_Fertig.png";
+
+    public static final Image battleshipImages[] = {
+            new Image(smallBattleshipImagePath),
+            new Image(mediumBattleshipImagePath),
+            new Image(largeBattleshipImagePath),
+            new Image(xlargeBattleshipImagePath)
+    };
+
+    public static final int AMOUNT_OF_SMALL_SHIPS = 4;
+    public static final int AMOUNT_OF_MEDIUM_SHIPS = 3;
+    public static final int AMOUNT_OF_LARGE_SHIPS = 2;
+    public static final int AMOUNT_OF_XLARGE_SHIPS = 1;
+
+    public static final int FIELDLENGTH_OF_SMALL_SHIPS = 2;
+    public static final int FIELDLENGTH_OF_MEDIUM_SHIPS = 3;
+    public static final int FIELDLENGTH_OF_LARGE_SHIPS = 4;
+    public static final int FIELDLENGTH_OF_XLARGE_SHIPS = 5;
+
+    public static final int FIELD_MIN_VALUE = 1;
+    public static final int FIELD_MAX_VALUE = 9;
 }
