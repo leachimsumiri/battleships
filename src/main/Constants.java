@@ -21,6 +21,12 @@ public class Constants {
     public static final String PLAYER2_WON_IMAGE_PATH = "file:res/spieler2_gewonnen.png";
     public static final String LEFT_ISLAND_IMAGE_PATH = "file:res/Insel_Unten_1.png";
     public static final String RIGHT_ISLAND_IMAGE_PATH = "file:res/Insel_Unten_2.png";
+    public static final String MISS_IMAGE_PATH = "file:res/Waterhitmarker.png";
+    public static final String HIT_IMAGE_PATH = "file:res/Hit.png";
+    public static final String SMALL_SHIP_DESTROYED_IMAGE_PATH = "file:res/1x2_Ship_Destroyed.png";
+    public static final String MEDIUM_SHIP_DESTROYED_IMAGE_PATH = "file:res/1x3_Ship_Destroyed.png";
+    public static final String LARGE_SHIP_DESTROYED_IMAGE_PATH = "file:res/1x4_Ship_Destroyed.png";
+    public static final String XLARGE_SHIP_DESTROYED_IMAGE_PATH = "file:res/1x5_Ship_Destroyed.png";
     private static final String BACKGROUND_IMAGE_PATH = "file:res/BattleshipsBackground.png";
 
     public static final BackgroundImage BACKGROUND_IMAGE = new BackgroundImage(new Image(BACKGROUND_IMAGE_PATH,
@@ -72,6 +78,8 @@ public class Constants {
 
     public static final int FIELD_MIN_VALUE = 1;
     public static final int FIELD_MAX_VALUE = 9;
+
+    public static final int FIELD_PIXEL_SIZE = 40;
 
     public static final int FIXED_GAMEWINDOW_WIDTH = 1800;
     public static final int FIXED_GAMEWINDOW_HEIGHT = 1000;
