@@ -11,13 +11,13 @@ public class Player {
         this.attackedFields.add(field);
     }
 
-    boolean wasPreviouslyAttackedOnField(Field field) {
+    public boolean hasPreviouslyAttackedSameField(Field field) {
         for (Field attackedField : this.attackedFields) {
-            if (attackedField.getX() == field.getX() && attackedField.getY() == field.getY()) {
-                return false;
+            if (attackedField.equals(field)) {
+                return true;
             }
         }
-        return true;
+        return false;
     }
 
     public void resetAttackedFields() {

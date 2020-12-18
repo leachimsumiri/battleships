@@ -3,24 +3,25 @@ package main;
 import java.util.ArrayList;
 
 public class Ship {
-    private ArrayList<ShipPart> shipparts = new ArrayList<>();
-    private int length;
-    private Field startField;
-    private Direction direction;
-    private int divx, divy;
+    private ArrayList<ShipPart> shipParts = new ArrayList<>();
+    private final int length;
+    private final Field startField;
+    private final Direction direction;
+    private final int divX;
+    private final int divY;
 
     public Field getStartField() {
         return startField;
     }
 
-    public int getDivx()
+    public int getDivX()
     {
-        return divx;
+        return divX;
     }
 
-    public int getDivy()
+    public int getDivY()
     {
-        return divy;
+        return divY;
     }
 
     public int getLength()
@@ -35,12 +36,12 @@ public class Ship {
 
     public ArrayList<ShipPart> getShipParts()
     {
-        return shipparts;
+        return shipParts;
     }
 
     private void generateShip(Field startField, int length, Direction direction) {
         for (int i = 0; i < length; i++) {
-            shipparts.add(new ShipPart(startField));
+            this.shipParts.add(new ShipPart(startField));
             switch (direction) {
                 case UP:
                     startField.decrementY();
@@ -62,14 +63,14 @@ public class Ship {
         this.startField = startField;
         this.direction = direction;
         this.length = length;
-        this.divx = diffvectorx;
-        this.divy = diffvectory;
+        this.divX = diffvectorx;
+        this.divY = diffvectory;
 
         generateShip(startField, length, direction);
     }
 
     public boolean attack(Field field) {
-        for (ShipPart shipPart : this.shipparts) {
+        for (ShipPart shipPart : this.shipParts) {
             if (shipPart.getField().equals(field)) {
                 shipPart.destroy();
                 return true;
@@ -79,8 +80,8 @@ public class Ship {
     }
 
     public boolean checkIfDestroyed() {
-        for (ShipPart shippart : this.shipparts) {
-            if (!shippart.isDamaged()) {
+        for (ShipPart shipPart : this.shipParts) {
+            if (!shipPart.isDamaged()) {
                 return false;
             }
         }

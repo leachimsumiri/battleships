@@ -38,28 +38,28 @@ public class Constants {
     public static final String WAV_MUSIC = "res/music.wav";
     public static final String WAV_WINNER = "res/winner.wav";
 
-    private static final Field PLAYER_1_SMALL_SHIP_IMAGE_INITIAL_FIELD  = new Field(1520,640);
-    private static final Field PLAYER_1_MEDIUM_SHIP_IMAGE_INITIAL_FIELD = new Field(1520,720);
-    private static final Field PLAYER_1_LARGE_SHIP_IMAGE_INITIAL_FIELD = new Field(1520,800);
-    private static final Field PLAYER_1_X_LARGE_SHIP_IMAGE_INITIAL_FIELD = new Field(1520,880);
+    private static final Field PLAYER_1_SMALL_SHIP_IMAGE_INITIAL_FIELD  = new Field(Constants.RIGHT_INVENTORY_X_POS,640);
+    private static final Field PLAYER_1_MEDIUM_SHIP_IMAGE_INITIAL_FIELD = new Field(Constants.RIGHT_INVENTORY_X_POS,720);
+    private static final Field PLAYER_1_LARGE_SHIP_IMAGE_INITIAL_FIELD = new Field(Constants.RIGHT_INVENTORY_X_POS,800);
+    private static final Field PLAYER_1_X_LARGE_SHIP_IMAGE_INITIAL_FIELD = new Field(Constants.RIGHT_INVENTORY_X_POS,880);
 
     public static final InitialFields PLAYER_1_INITIAL_FIELDS = new InitialFields(PLAYER_1_SMALL_SHIP_IMAGE_INITIAL_FIELD,
             PLAYER_1_MEDIUM_SHIP_IMAGE_INITIAL_FIELD, PLAYER_1_LARGE_SHIP_IMAGE_INITIAL_FIELD, PLAYER_1_X_LARGE_SHIP_IMAGE_INITIAL_FIELD);
 
-    private static final Field PLAYER_2_SMALL_SHIP_IMAGE_INITIAL_FIELD = new Field(1800 - 1520 - 3 * 40,640);
-    private static final Field PLAYER_2_MEDIUM_SHIP_IMAGE_INITIAL_FIELD = new Field(1800 - 1520 - 3 * 40,720);
-    private static final Field PLAYER_2_LARGE_SHIP_IMAGE_INITIAL_FIELD = new Field(1800 - 1520 - 3 * 40,800);
-    private static final Field PLAYER_2_X_LARGE_SHIP_IMAGE_INITIAL_FIELD = new Field(1800 - 1520 - 3 * 40,880);
+    private static final Field PLAYER_2_SMALL_SHIP_IMAGE_INITIAL_FIELD = new Field(Constants.LEFT_INVENTORY_X_POS,640);
+    private static final Field PLAYER_2_MEDIUM_SHIP_IMAGE_INITIAL_FIELD = new Field(Constants.LEFT_INVENTORY_X_POS,720);
+    private static final Field PLAYER_2_LARGE_SHIP_IMAGE_INITIAL_FIELD = new Field(Constants.LEFT_INVENTORY_X_POS,800);
+    private static final Field PLAYER_2_X_LARGE_SHIP_IMAGE_INITIAL_FIELD = new Field(Constants.LEFT_INVENTORY_X_POS,880);
 
     public static final InitialFields PLAYER_2_INITIAL_FIELDS = new InitialFields(PLAYER_2_SMALL_SHIP_IMAGE_INITIAL_FIELD,
             PLAYER_2_MEDIUM_SHIP_IMAGE_INITIAL_FIELD, PLAYER_2_LARGE_SHIP_IMAGE_INITIAL_FIELD, PLAYER_2_X_LARGE_SHIP_IMAGE_INITIAL_FIELD);
 
-    private static String smallBattleshipImagePath = "file:res/1x2_Schiff_Horizontal_1_Fertig.png";
-    private static String mediumBattleshipImagePath = "file:res/1x3_Schiff_Horizontal_1_Fertig.png";
-    private static String largeBattleshipImagePath = "file:res/1x4_Schiff_Horizontal_1_Fertig.png";
-    private static String xlargeBattleshipImagePath = "file:res/1x5_Schiff_Horizontal_1_Fertig.png";
+    private static final String smallBattleshipImagePath = "file:res/1x2_Schiff_Horizontal_1_Fertig.png";
+    private static final String mediumBattleshipImagePath = "file:res/1x3_Schiff_Horizontal_1_Fertig.png";
+    private static final String largeBattleshipImagePath = "file:res/1x4_Schiff_Horizontal_1_Fertig.png";
+    private static final String xlargeBattleshipImagePath = "file:res/1x5_Schiff_Horizontal_1_Fertig.png";
 
-    public static final Image battleshipImages[] = {
+    public static final Image[] battleshipImages = {
             new Image(smallBattleshipImagePath),
             new Image(mediumBattleshipImagePath),
             new Image(largeBattleshipImagePath),
@@ -76,11 +76,15 @@ public class Constants {
     public static final int FIELDLENGTH_OF_LARGE_SHIPS = 4;
     public static final int FIELDLENGTH_OF_XLARGE_SHIPS = 5;
 
-    public static final int FIELD_MIN_VALUE = 1;
+    public static final int FIELD_MIN_VALUE = 0;
     public static final int FIELD_MAX_VALUE = 9;
 
     public static final int FIELD_PIXEL_SIZE = 40;
+    public static final int GAMEFIELD_SIZE = 440;
 
     public static final int FIXED_GAMEWINDOW_WIDTH = 1800;
     public static final int FIXED_GAMEWINDOW_HEIGHT = 1000;
+
+    public static final int LEFT_INVENTORY_X_POS = 1800 - 1520 - 3 * 40;
+    public static final int RIGHT_INVENTORY_X_POS = 1520;
 }

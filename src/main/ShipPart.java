@@ -1,7 +1,7 @@
 package main;
 
 public class ShipPart {
-    private Field field;
+    private final Field field;
     private boolean damage;
 
     public ShipPart(Field field) {

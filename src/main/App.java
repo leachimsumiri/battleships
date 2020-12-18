@@ -4,11 +4,7 @@ import javafx.application.Application;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
-import java.util.logging.Logger;
-
 public class App extends Application {
-    private final static Logger LOGGER = Logger.getLogger(App.class.getName());
-
     private static final Player player1 = new Player();
     private static final Player player2 = new Player();
 
@@ -23,12 +19,11 @@ public class App extends Application {
     public void start(Stage primaryStage) {
         GameGUI gameGUI = new GameGUI(primaryStage);
 
-        addEventlistener(gameGUI);
+        addStartMenuEventListeners(gameGUI);
     }
 
-    private void addEventlistener(GameGUI gameGUI){
+    private void addGameEventListeners(GameGUI gameGUI){
         addResetButtonEventListener(gameGUI);
-        addNewGameButtonEventListener(gameGUI);
         addContinueButtonEventListener(gameGUI);
         addFieldClickEventListener(gameGUI);
         addLeftSaveButtonEventListener(gameGUI);
@@ -37,136 +32,88 @@ public class App extends Application {
         addShowPlayer2ShipsButtonEventListener(gameGUI);
     }
 
-    private void saveShips(GameGUI gameGUI,ShipImage[] shipImages, Player player, int p1x, int p1y, int p2x, int p2y) {
+    private void addStartMenuEventListeners(GameGUI gameGUI){
+        addNewGameButtonEventListener(gameGUI);
+    }
+
+    private void lockOrResetShipImages(Field field, Player player, ShipImage shipImage){
+        if (field != null) {
+            if (player.playerGameField.addShipToFleet(field, shipImage.getLength(), shipImage.getDirection(), shipImage.getDiffVectorX(), shipImage.getDiffVectorY())) {
+                if(player.playerGameField.isFleetComplete())
+                    shipImage.lock();
+            } else {
+                shipImage.reset();
+            }
+        } else {
+            shipImage.reset();
+        }
+    }
+
+    private void saveShips(GameGUI gameGUI, ShipImage[] shipImages, Player player, int[] constraints) {
         for (ShipImage shipImage : shipImages) {
             if (!shipImage.isLocked()) {
-                Field field = Field.caclulateFieldFromImagePixels(shipImage.getField(), p1x, p1y, p2x, p2y);
-
-                if (field != null) {
-                    if (player.playerGameField.addShipToFleet(field, shipImage.getLength(), shipImage.getDirection(), shipImage.getDiffVectorX(), shipImage.getDiffVectorY())) {
-                        if(player.playerGameField.isFleetComplete())
-                            shipImage.lock();
-                    } else {
-                        // System.out.println("schiff nicht angelegt+ zurückseten");
-                        //TODO check ob reset geht
-                        shipImage.changePosition(new Field());
-                        shipImage.rotateTo(Direction.RIGHT);
-                    }
-                } else {
-                    //  System.out.println("null+zurücksetzen");
-                    shipImage.changePosition(new Field());
-                    shipImage.rotateTo(Direction.RIGHT);
-
-                }
-            } else {
-                //   System.out.println("schiff deaktiviert");
+                Field field = Field.caclulateFieldFromImagePixels(shipImage.getField(), constraints);
+                this.lockOrResetShipImages(field, player, shipImage);
             }
         }
 
         if (player.playerGameField.isFleetComplete()) {
             gameRound++;
             if (player == player1) {
-                gameGUI.changeMask();
-                gameGUI.SAVE_SHIPS_LEFT_BUTTON.setVisible(false);
+                proceedAfterSaveShipsPlayer1(gameGUI);
             } else {
-                gameGUI.SAVE_SHIPS_RIGHT_BUTTON.setVisible(false);
-                gameGUI.changeMask();
-                gameGUI.SHOW_PLAYER_1_SHIPS_BUTTON.setVisible(true);
-                gameGUI.SHOW_PLAYER_2_SHIPS_BUTTON.setVisible(true);
-                gameGUI.INDICATE_1.setVisible(true);
+                proceedAfterSaveShipsPlayer2(gameGUI);
             }
-            if (player1.playerGameField.isFleetComplete() && player2.playerGameField.isFleetComplete()) {
+
+            if (this.shipsComplete) {
                 gameGUI.activateMask();
             }
         }
     }
 
+    private void proceedAfterSaveShipsPlayer1(GameGUI gameGUI){
+        gameGUI.proceedAfterSaveShipsPlayer1();
+    }
+
+    private void proceedAfterSaveShipsPlayer2(GameGUI gameGUI){
+        gameGUI.proceedAfterSaveShipsPlayer2();
+    }
+
     private void executeAttack(GameGUI gameGUI, Field shipField) {
         Field field;
-        if (!(player1.playerGameField.gameOver() || player2.playerGameField.gameOver())) {
-            if (shipsComplete) {
-                System.out.println("Schiffe fertig");
-                if (gameRound % 2 == 1) {
-                    field = Field.caclulateFieldFromImagePixels(shipField, 440 + 40, 40 + 40, 440 + 440, 440 + 40);
+        if (noGameOvers() && this.shipsComplete) {
+            if (player1Turn()) {
+                field = Field.caclulateFieldFromImagePixels(shipField, ShipPositionConstraints.TOP_LEFT_CONSTRAINTS);
+                executePlayMove(gameGUI, player2, player1, shipField, field);
+            } else {
+                field = Field.caclulateFieldFromImagePixels(shipField, ShipPositionConstraints.TOP_RIGHT_CONSTRAINTS);
+                executePlayMove(gameGUI, player1, player2, shipField, field);
+            }
+        }
+    }
 
-                    if (field != null) {
-                        if (player1.wasPreviouslyAttackedOnField(field)) {
-                            if (player2.playerGameField.attack(field)) {
-                                gameGUI.drawAttack(field, shipField, player2);
-                                player1.saveAttack(field);
-                                gameGUI.activateMask();
-                                AudioData.bombPlayer.stop();
-                                AudioData.bombPlayer.play();
+    private boolean noGameOvers(){
+        return !(player1.playerGameField.gameOver() || player2.playerGameField.gameOver());
+    }
 
-                            } else {
-                                gameGUI.drawMiss(shipField);
-                                player1.saveAttack(field);
-                                gameGUI.activateMask();
-                                gameGUI.INDICATE_1.setVisible(false);
-                                gameGUI.INDICATE_2.setVisible(true);
-                                AudioData.missPlayer.stop();
-                                AudioData.missPlayer.play();
-                            }
-                        }
-                    }
+    private boolean player1Turn(){
+        return gameRound % 2 == 1;
+    }
 
-                    if (player2.playerGameField.gameOver()) {
-                        System.out.println("Spieler 1 hat gewonnen");
-                        gameGUI.deactivateMask();
-                        gameGUI.SHOW_PLAYER_1_SHIPS_BUTTON.setVisible(false);
-                        gameGUI.SHOW_PLAYER_2_SHIPS_BUTTON.setVisible(false);
-                        gameGUI.RESET_BUTTON.setVisible(false);
-                        gameGUI.getRootPane().getChildren().add(gameGUI.PLAYER_1_WON_IMAGE_VIEW);
-                        gameGUI.PLAYER_1_WON_IMAGE_VIEW.setX(50);
-                        gameGUI.PLAYER_1_WON_IMAGE_VIEW.setY(520);
-                        AudioData.winnerPlayer.stop();
-                        AudioData.winnerPlayer.play();
-                        gameGUI.getRootPane().getChildren().add(gameGUI.CONTINUE_BUTTON);
-                        gameGUI.CONTINUE_BUTTON.setLayoutX(160);
-                        gameGUI.CONTINUE_BUTTON.setLayoutY(850);
-                        gameGUI.CONTINUE_BUTTON.setVisible(true);
-                    }
-
+    private void executePlayMove(GameGUI gameGUI, Player attackedPlayer, Player attackingPlayer, Field shipField, Field field){
+        if (field != null) {
+            if (!attackingPlayer.hasPreviouslyAttackedSameField(field)) {
+                if (attackedPlayer.playerGameField.attack(field)) {
+                    gameGUI.drawAttackMove(attackedPlayer, attackingPlayer, field, shipField);
                 } else {
-                    field = Field.caclulateFieldFromImagePixels(shipField, 440 + 40 + 10 * 40 + 2 * 40, 40 + 40, 440 + 440 + 440 + 40, 440 + 40);
-                    if (field != null) {
-                        if (player2.wasPreviouslyAttackedOnField(field)) {
-                            if (player1.playerGameField.attack(field)) {
-                                gameGUI.drawAttack(field, shipField, player1);
-                                player2.saveAttack(field);
-                                gameGUI.activateMask();
-                                AudioData.bombPlayer.stop();
-                                AudioData.bombPlayer.play();
-                            } else {
-                                gameGUI.drawMiss(shipField);
-                                player2.saveAttack(field);
-                                gameGUI.activateMask();
-                                gameGUI.INDICATE_1.setVisible(true);
-                                gameGUI.INDICATE_2.setVisible(false);
-                                AudioData.missPlayer.stop();
-                                AudioData.missPlayer.play();
-                            }
-                        }
-                    }
-
-                    if (player1.playerGameField.gameOver()) {
-                        System.out.println("Spieler 2 hat gewonnen");
-                        gameGUI.deactivateMask();
-                        gameGUI.SHOW_PLAYER_1_SHIPS_BUTTON.setVisible(false);
-                        gameGUI.SHOW_PLAYER_2_SHIPS_BUTTON.setVisible(false);
-                        gameGUI.RESET_BUTTON.setVisible(false);
-                        gameGUI.getRootPane().getChildren().add(gameGUI.PLAYER_2_WON_IMAGE_VIEW);
-                        gameGUI.PLAYER_2_WON_IMAGE_VIEW.setX(1450);
-                        gameGUI.PLAYER_2_WON_IMAGE_VIEW.setY(520);
-                        AudioData.winnerPlayer.stop();
-                        AudioData.winnerPlayer.play();
-                        gameGUI.getRootPane().getChildren().add(gameGUI.CONTINUE_BUTTON);
-                        gameGUI.CONTINUE_BUTTON.setLayoutX(1520);
-                        gameGUI.CONTINUE_BUTTON.setLayoutY(850);
-                        gameGUI.CONTINUE_BUTTON.setVisible(true);
-                    }
+                    gameGUI.drawMissMove(attackingPlayer, field, shipField);
                 }
             }
+        }
+
+        if (attackedPlayer.playerGameField.gameOver()) {
+            int winner = attackingPlayer == player1 ? 1 : 2;
+            gameGUI.playWinningAnimations(winner);
         }
     }
 
@@ -174,14 +121,8 @@ public class App extends Application {
         return player1.playerGameField.isFleetComplete() && player2.playerGameField.isFleetComplete();
     }
 
-    //TODO ist das wirklich reset?
     public void resetGame(GameGUI gameGUI) {
-        for (int i = 0; i < Constants.TOTAL_SHIP_COUNT; i++) {
-            gameGUI.getPlayer1ShipImages()[i].rotateTo(Direction.RIGHT);
-            gameGUI.getPlayer2ShipImages()[i].rotateTo(Direction.RIGHT);
-            gameGUI.getPlayer2ShipImages()[i].reset();
-            gameGUI.getPlayer1ShipImages()[i].reset();
-        }
+        gameGUI.resetShipImages();
 
         player1.playerGameField.removeAll();
         player2.playerGameField.removeAll();
@@ -189,7 +130,7 @@ public class App extends Application {
         player2.resetAttackedFields();
 
         gameRound = 1;
-        shipsComplete = false;
+        this.shipsComplete = false;
 
         gameGUI.SAVE_SHIPS_RIGHT_BUTTON.setVisible(true);
         gameGUI.SAVE_SHIPS_LEFT_BUTTON.setVisible(true);
@@ -211,6 +152,7 @@ public class App extends Application {
         gameGUI.NEW_GAME_BUTTON.setOnAction(event -> {
             this.resetGame(gameGUI);
             gameGUI.updateStage();
+            addGameEventListeners(gameGUI);
         });
     }
 
@@ -243,14 +185,14 @@ public class App extends Application {
 
     private void addLeftSaveButtonEventListener(GameGUI gameGUI){
         gameGUI.SAVE_SHIPS_LEFT_BUTTON.setOnAction(event -> {
-            saveShips(gameGUI, gameGUI.getPlayer2ShipImages(), player1, 440 + 40, 40 + 440 + 40 + 40, 440 + 440, 40 + 920);
+            saveShips(gameGUI, gameGUI.getPlayer2ShipImages(), player1, ShipPositionConstraints.BOTTOM_LEFT_CONSTRAINTS);
             this.shipsComplete = checkIfAllFleetsAreComplete();
         });
     }
 
     private void addRightSaveButtonEventListener(GameGUI gameGUI){
         gameGUI.SAVE_SHIPS_RIGHT_BUTTON.setOnAction(event -> {
-            saveShips(gameGUI, gameGUI.getPlayer1ShipImages(), player2, 2 * 440 + 40 + 40, 40 + 440 + 40 + 40, 440 + 440 + 40 + 440, 920 + 40);
+            saveShips(gameGUI, gameGUI.getPlayer1ShipImages(), player2, ShipPositionConstraints.BOTTOM_RIGHT_CONSTRAINTS);
             this.shipsComplete = checkIfAllFleetsAreComplete();
         });
     }
