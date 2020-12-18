@@ -1,7 +1,0 @@
-Code Review und Refactoring
-
-Welche „Bad Smells“ sind Ihnen aufgefallen und konnten Sie lösen?
-Welche „Bad Smells“ sind Ihnen aufgefallen und konnten Sie (noch) nicht lösen?
-Wie ist die Trennung zwischen GUI und Business Logik?
-Wo könnten Patterns eingesetzt werden?
-Wie könnte die Applikation verbessert werden?
