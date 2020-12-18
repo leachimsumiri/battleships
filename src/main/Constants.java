@@ -16,13 +16,18 @@ public class Constants {
     public static final String LEFT_ISLAND_IMAGE_PATH = "file:res/Insel_Unten_1.png";
     public static final String RIGHT_ISLAND_IMAGE_PATH = "file:res/Insel_Unten_2.png";
 
-    public static final Field player1SmallShipImageInitialField = new Field(1520,640);
-    public static final Field player1MediumShipImageInitialField = new Field(1520,720);
-    public static final Field player1LargeShipImageInitialField = new Field(1520,800);
-    public static final Field player1XLargeShipImageInitialField = new Field(1520,880);
+    public static final String WAV_BOMB = "res/bomb.wav";
+    public static final String WAV_MISS = "res/miss.wav";
+    public static final String WAV_MUSIC = "res/music.wav";
+    public static final String WAV_WINNER = "res/winner.wav";
 
-    public static final Field player2SmallShipImageInitialField = new Field(1800 - 1520 - 3 * 40,640);
-    public static final Field player2MediumShipImageInitialField = new Field(1800 - 1520 - 3 * 40,720);
-    public static final Field player2LargeShipImageInitialField = new Field(1800 - 1520 - 3 * 40,800);
-    public static final Field player2XLargeShipImageInitialField = new Field(1800 - 1520 - 3 * 40,880);
+    public static final Field PLAYER_1_SMALL_SHIP_IMAGE_INITIAL_FIELD = new Field(1520,640);
+    public static final Field PLAYER_1_MEDIUM_SHIP_IMAGE_INITIAL_FIELD = new Field(1520,720);
+    public static final Field PLAYER_1_LARGE_SHIP_IMAGE_INITIAL_FIELD = new Field(1520,800);
+    public static final Field PLAYER_1_X_LARGE_SHIP_IMAGE_INITIAL_FIELD = new Field(1520,880);
+
+    public static final Field PLAYER_2_SMALL_SHIP_IMAGE_INITIAL_FIELD = new Field(1800 - 1520 - 3 * 40,640);
+    public static final Field PLAYER_2_MEDIUM_SHIP_IMAGE_INITIAL_FIELD = new Field(1800 - 1520 - 3 * 40,720);
+    public static final Field PLAYER_2_LARGE_SHIP_IMAGE_INITIAL_FIELD = new Field(1800 - 1520 - 3 * 40,800);
+    public static final Field PLAYER_2_X_LARGE_SHIP_IMAGE_INITIAL_FIELD = new Field(1800 - 1520 - 3 * 40,880);
 }
