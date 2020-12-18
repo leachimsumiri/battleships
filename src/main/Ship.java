@@ -1,23 +1,16 @@
-package sample;
+package main;
 
 import java.util.ArrayList;
 
 public class Ship {
     private ArrayList<ShipPart> shipparts = new ArrayList<>();
     private int length;
-    private int x;
-    private int y;
+    private Field startField;
     private Direction direction;
     private int divx, divy;
 
-    public int getX()
-    {
-        return x;
-    }
-
-    public int getY()
-    {
-        return y;
+    public Field getStartField() {
+        return startField;
     }
 
     public int getDivx()
@@ -45,43 +38,40 @@ public class Ship {
         return shipparts;
     }
 
-    private void generateShip(int x, int y, int length, Direction directions) {
+    private void generateShip(Field startField, int length, Direction direction) {
         for (int i = 0; i < length; i++) {
-            shipparts.add(new ShipPart(x, y));
-            switch (directions) {
+            shipparts.add(new ShipPart(startField));
+            switch (direction) {
                 case UP:
-                    y--;
+                    startField.decrementY();
                     break;
                 case RIGHT:
-                    x++;
+                    startField.incrementX();
                     break;
                 case LEFT:
-                    x--;
+                    startField.decrementX();
                     break;
                 case DOWN:
-                    y++;
+                    startField.incrementY();
                     break;
             }
         }
     }
 
-    public Ship(int x, int y, int length, Direction directions, int diffvectorx, int diffvectory) {
-        this.x = x;
-        this.y = y;
-        this.direction = directions;
+    public Ship(Field startField, int length, Direction direction, int diffvectorx, int diffvectory) {
+        this.startField = startField;
+        this.direction = direction;
         this.length = length;
         this.divx = diffvectorx;
         this.divy = diffvectory;
 
-        generateShip(x, y, length, directions);
-
-        System.out.println("ich generiere schiff an X= " + this.x + " Y =" + this.y + " richtung" + this.direction + " länge =" + this.length);
+        generateShip(startField, length, direction);
     }
 
-    public boolean attack(int x, int y) {
-        for (ShipPart shippart : this.shipparts) {
-            if (shippart.getX() == x && shippart.getY() == y) {
-                shippart.destroy();
+    public boolean attack(Field field) {
+        for (ShipPart shipPart : this.shipparts) {
+            if (shipPart.getField().equals(field)) {
+                shipPart.destroy();
                 return true;
             }
         }
