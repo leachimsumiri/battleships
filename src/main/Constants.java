@@ -1,6 +1,10 @@
 package main;
 
 import javafx.scene.image.Image;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
 
 public class Constants {
     public static final String NEW_GAME_TEXT = "Neues Spiel";
@@ -17,6 +21,11 @@ public class Constants {
     public static final String PLAYER2_WON_IMAGE_PATH = "file:res/spieler2_gewonnen.png";
     public static final String LEFT_ISLAND_IMAGE_PATH = "file:res/Insel_Unten_1.png";
     public static final String RIGHT_ISLAND_IMAGE_PATH = "file:res/Insel_Unten_2.png";
+    private static final String BACKGROUND_IMAGE_PATH = "file:res/BattleshipsBackground.png";
+
+    public static final BackgroundImage BACKGROUND_IMAGE = new BackgroundImage(new Image(BACKGROUND_IMAGE_PATH,
+            Constants.FIXED_GAMEWINDOW_WIDTH, Constants.FIXED_GAMEWINDOW_HEIGHT,true, true),
+            BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
 
     public static final String WAV_BOMB = "res/bomb.wav";
     public static final String WAV_MISS = "res/miss.wav";
@@ -63,4 +72,7 @@ public class Constants {
 
     public static final int FIELD_MIN_VALUE = 1;
     public static final int FIELD_MAX_VALUE = 9;
+
+    public static final int FIXED_GAMEWINDOW_WIDTH = 1800;
+    public static final int FIXED_GAMEWINDOW_HEIGHT = 1000;
 }
