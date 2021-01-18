@@ -1,5 +1,5 @@
 [![Build Status](https://travis-ci.com/leachimsumiri/battleships.svg?branch=master)](https://travis-ci.com/leachimsumiri/battleships)
-[![dockerbuild](https://img.shields.io/docker/build/mirimus/battelships)](https://hub.docker.com/repository/docker/mirimus/battelships)
+[![dockerbuild](https://img.shields.io/docker/build/mirimus/battelships)](https://cloud.docker.com/u/mirimus/repository/docker/mirimus/battelships)
 [![codecov](https://codecov.io/gh/leachimsumiri/battleships/branch/master/graph/badge.svg?token=E1FZPP33YI)](https://codecov.io/gh/leachimsumiri/battleships)
 [![QualityGate](https://sonarcloud.io/api/project_badges/measure?project=leachimsumiri_battleships&metric=alert_status)](https://sonarcloud.io/dashboard?id=leachimsumiri_battleships)
 [![License: MIT](https://img.shields.io/badge/License-MITyellow.svg)](https://opensource.org/licenses/MIT)
