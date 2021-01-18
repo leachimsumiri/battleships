@@ -1,4 +1,4 @@
-[![Build Status](https://travisci.com/leachimsumiri/battleships.svg)](https://travis-ci.com/leachimsumiri/battleships)
+[![Build Status](https://travisci.com/leachimsumiri/battleships.svg?branch=master)](https://travis-ci.com/leachimsumiri/battleships)
 
 # Battleships Refactoring
 
