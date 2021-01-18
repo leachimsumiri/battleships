@@ -22,3 +22,5 @@ script:
   </repositories>\n </profile>\n </profiles>\n <activeProfiles>\n <activeProfile>nomvnsearch</activeProfile>\n </activeProfiles>\n</settings>' > $HOME/.m2/settings.xml
   - cat $HOME/.m2/settings.xml
   - mvn deploy
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
