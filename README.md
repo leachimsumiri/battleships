@@ -1,3 +1,6 @@
+[![Build Status](https://travisci.com/leachimsumiri/battleships.svg)](https://travis-ci.com/
+leachimsumiri/battleships)
+
 # Battleships Refactoring
 
 For running locally: Note that Java FX was removed from the SDK with Java 11.
