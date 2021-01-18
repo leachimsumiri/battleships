@@ -26,4 +26,20 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
+
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>http://www.opensource.org/licenses/mit-license.php</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+    <developers>
+        <developer>
+            <email>michaelirimus@gmail.com</email>
+            <name>Michael Irimus</name>
+            <url>https://github.com/leachimsumiri</url>
+            <id>mirimus</id>
+        </developer>
+    </developers>
 </project>
