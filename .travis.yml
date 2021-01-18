@@ -22,6 +22,7 @@ script:
   </repositories>\n </profile>\n </profiles>\n <activeProfiles>\n <activeProfile>nomvnsearch</activeProfile>\n </activeProfiles>\n</settings>' > $HOME/.m2/settings.xml
   - cat $HOME/.m2/settings.xml
   - mvn deploy
+  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=leachimsumiri_battleships
 after_success:
   - bash <(curl -s https://codecov.io/bash)
 addons:
@@ -29,7 +30,3 @@ addons:
     organization: "leachimsumiri"
     token:
       secure: "athrVC5jtPQ+bpqCLEWwFtQtojB0xzymCIj8m0Lq/Hg9wAe3NnUhq/08x0WrcmoJ12pAnEvWtHYhywbABS1n5SsJAVJCBkVsawgaFgLi1NoQBl8mK7+diZ23ij5Ma8ZXCCk7QZui16MjTG/pjfIckM14pRRdPA2IFNYx3iXSMRuJ/qB/YXtL7N0pLm8rQP93c9PgyjwuQDnA3w4jf5vq30nChxhIL9dsIDrQU+cqqxTKHU92iIeLy7nfuZc6w3+nT0T66DBD+DMXrIWE3X39oFnDlLP2bujVdhPtgOtYibx4wmFBWMPQjarUcFLQMqodHwGeEFVZGIQXq4u1urwpxQButMTp/qUOtDruRQojYC5HGCzRPxHkSJoZKC+FsgwWNUvUfb/GneuRUzGCxYN7qJO4tJKiyieTSROlt+kul9lWgCHlS8TbDM4DN3fJk6VnVMdG7s3yJxj74gopcD7IhJHIR+LO4pFqk3B1tZRf84/evZWoUDG+raUC2jrp3m9/H3/rnrUG3z9HE4fo02DlSggCejEu+4T8keoWbevgdx2rBiLo2kHNWI3ubw75tQzkaXw8/i4VjrjnWCrA2mk4OIX5CdcjNhEaq1zu3HYUCDFpIEnWAN7XyYwwOTCxQ2S1TojUzj3c2UY0QH2SDzsMiHFMHMpvbcXPisQDxT1rQx8=" # encrypted value of your token
-
-script:
-  # the following command line builds the project, runs the tests with coverage and then execute the SonarCloud analysis
-  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=leachimsumiri_battleships
