@@ -1,5 +1,5 @@
 [![Build Status](https://travis-ci.com/leachimsumiri/battleships.svg?branch=master)](https://travis-ci.com/leachimsumiri/battleships)
-[![dockerbuild](https://img.shields.io/docker/build/mirimus/battleships)](https://hub.docker.com/repository/docker/mirimus/battelships)
+[![dockerbuild](https://img.shields.io/docker/build/mirimus/battelships)](https://hub.docker.com/repository/docker/mirimus/battelships)
 [![codecov](https://codecov.io/gh/leachimsumiri/battleships/branch/master/graph/badge.svg?token=E1FZPP33YI)](https://codecov.io/gh/leachimsumiri/battleships)
 
 # Battleships Refactoring
