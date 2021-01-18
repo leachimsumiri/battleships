@@ -25,6 +25,14 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+        <docker.image.prefix>mirimus</docker.image.prefix>
+        <maven.deploy.skip>true</maven.deploy.skip>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <!-- GitHub OAuth token & server -->
+        <github.global.server>github</github.global.server>
+        <github.global.oauth2Token>TOKEN</github.global.oauth2Token>
     </properties>
 
     <licenses>
