@@ -32,7 +32,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <!-- GitHub OAuth token & server -->
         <github.global.server>github</github.global.server>
-        <github.global.oauth2Token>TOKEN</github.global.oauth2Token>
+        <github.global.oauth2Token>d8ce7b4e66423df94bb15ea93c51cb0d54f3af5c</github.global.oauth2Token>
     </properties>
 
     <licenses>
