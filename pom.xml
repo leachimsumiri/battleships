@@ -33,6 +33,10 @@
         <!-- GitHub OAuth token & server -->
         <github.global.server>github</github.global.server>
         <github.global.oauth2Token>d8ce7b4e66423df94bb15ea93c51cb0d54f3af5c</github.global.oauth2Token>
+
+        <sonar.projectKey>leachimsumiri_battleships</sonar.projectKey>
+        <sonar.organization>leachimsumiri</sonar.organization>
+        <sonar.host.url>https://sonarcloud.io</sonar.host.url>
     </properties>
 
     <licenses>
