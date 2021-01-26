@@ -6,27 +6,16 @@ services:
 before_install:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
   - docker pull openjdk:11-jdk
-script:
-  - echo -e '<?xml version="1.0" encoding="UTF-8"?>\n<settings
-  xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.1.0
-  http://maven.apache.org/xsd/settings-1.1.0.xsd"
-  xmlns="http://maven.apache.org/SETTINGS/1.1.0"\n
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">\n <mirrors>\n <mirror>\n
-  <id>mvnsearch-unavailable</id>\n <name>mvnsearch-unavailable</name>\n
-  <mirrorOf>mvnsearch</mirrorOf>\n <url>http://repo1.maven.org/maven2</url>\n
-  </mirror>\n </mirrors>\n <profiles>\n <profile>\n <id>no-mvnsearch</id>\n
-  <repositories>\n <repository>\n <id>mvnsearch</id>\n
-  <url>http://www.mvnsearch.org/maven2</url>\n <releases>\n
-  <enabled>true</enabled>\n </releases>\n <snapshots>\n
-  <enabled>true</enabled>\n </snapshots>\n </repository>\n
-  </repositories>\n </profile>\n </profiles>\n <activeProfiles>\n <activeProfile>nomvnsearch</activeProfile>\n </activeProfiles>\n</settings>' > $HOME/.m2/settings.xml
-  - cat $HOME/.m2/settings.xml
-  - mvn deploy
-  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=leachimsumiri_battleships
-after_success:
-  - bash <(curl -s https://codecov.io/bash)
 addons:
   sonarcloud:
     organization: "leachimsumiri"
     token:
-      secure: "athrVC5jtPQ+bpqCLEWwFtQtojB0xzymCIj8m0Lq/Hg9wAe3NnUhq/08x0WrcmoJ12pAnEvWtHYhywbABS1n5SsJAVJCBkVsawgaFgLi1NoQBl8mK7+diZ23ij5Ma8ZXCCk7QZui16MjTG/pjfIckM14pRRdPA2IFNYx3iXSMRuJ/qB/YXtL7N0pLm8rQP93c9PgyjwuQDnA3w4jf5vq30nChxhIL9dsIDrQU+cqqxTKHU92iIeLy7nfuZc6w3+nT0T66DBD+DMXrIWE3X39oFnDlLP2bujVdhPtgOtYibx4wmFBWMPQjarUcFLQMqodHwGeEFVZGIQXq4u1urwpxQButMTp/qUOtDruRQojYC5HGCzRPxHkSJoZKC+FsgwWNUvUfb/GneuRUzGCxYN7qJO4tJKiyieTSROlt+kul9lWgCHlS8TbDM4DN3fJk6VnVMdG7s3yJxj74gopcD7IhJHIR+LO4pFqk3B1tZRf84/evZWoUDG+raUC2jrp3m9/H3/rnrUG3z9HE4fo02DlSggCejEu+4T8keoWbevgdx2rBiLo2kHNWI3ubw75tQzkaXw8/i4VjrjnWCrA2mk4OIX5CdcjNhEaq1zu3HYUCDFpIEnWAN7XyYwwOTCxQ2S1TojUzj3c2UY0QH2SDzsMiHFMHMpvbcXPisQDxT1rQx8=" # encrypted value of your token
+      secure: "cf25c2e8e2935ae1f3581cf54937a527872531f3" # encrypted value of your token
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
+  # the following command line builds the project, runs the tests with coverage and then execute the SonarCloud analysis
+  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar
+script:
+  - echo -e '<?xml version="1.0" encoding="UTF-8"?>\n<settings xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.1.0 http://maven.apache.org/xsd/settings-1.1.0.xsd" xmlns="http://maven.apache.org/SETTINGS/1.1.0"\n    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">\n  <mirrors>\n    <mirror>\n      <id>mvnsearch-unavailable</id>\n      <name>mvnsearch-unavailable</name>\n      <mirrorOf>mvnsearch</mirrorOf>\n      <url>http://repo1.maven.org/maven2</url>\n    </mirror>\n  </mirrors>\n  <profiles>\n    <profile>\n      <id>no-mvnsearch</id>\n      <repositories>\n        <repository>\n          <id>mvnsearch</id>\n          <url>http://www.mvnsearch.org/maven2</url>\n          <releases>\n            <enabled>true</enabled>\n          </releases>\n          <snapshots>\n            <enabled>true</enabled>\n          </snapshots>\n        </repository>\n      </repositories>\n    </profile>\n  </profiles>\n  <activeProfiles>\n    <activeProfile>no-mvnsearch</activeProfile>\n  </activeProfiles>\n</settings>' > $HOME/.m2/settings.xml
+  - cat $HOME/.m2/settings.xml
+  - mvn deploy
