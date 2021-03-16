@@ -1,5 +1,3 @@
-package main;
-
 public class InitialFields {
     private Field smallShipField;
     private Field mediumShipField;

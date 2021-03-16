@@ -1,5 +1,3 @@
-package main;
-
 import javafx.scene.image.Image;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;

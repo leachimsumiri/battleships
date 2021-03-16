@@ -1,5 +1,3 @@
-package main;
-
 import javafx.scene.image.Image;
 import javafx.scene.input.*;
 import javafx.scene.image.ImageView;

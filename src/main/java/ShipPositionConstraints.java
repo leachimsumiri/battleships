@@ -1,5 +1,3 @@
-package main;
-
 public class ShipPositionConstraints {
     public static final int TOP_LEFT_GAMEFIELD_X_LOW_CONSTRAINT = Constants.GAMEFIELD_SIZE + Constants.FIELD_PIXEL_SIZE;
     public static final int TOP_LEFT_GAMEFIELD_X_HIGH_CONSTRAINT = Constants.GAMEFIELD_SIZE + Constants.GAMEFIELD_SIZE;

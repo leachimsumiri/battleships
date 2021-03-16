@@ -6,6 +6,8 @@
 
 # Battleships Refactoring
 
+An exercise to refactor a poorly programmed java fx battleship game.
+
 For running locally: Note that Java FX was removed from the SDK with Java 11.
 
 ## Angabe: Code Review und Refactoring

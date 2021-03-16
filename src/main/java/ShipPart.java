@@ -1,5 +1,3 @@
-package main;
-
 public class ShipPart {
     private final Field field;
     private boolean damage;
